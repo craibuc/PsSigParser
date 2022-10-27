@@ -41,7 +41,8 @@ function Invoke-SigParser
                 # misc
                 'Miscell. (Med.Supl.;Non-Drugs)' = 'MISCELL MED SUPL'
             }
-            Frequency = @{
+            # using an ordered dictionary to ensure that PRN is the last frequency entry
+            Frequency = [ordered]@{
                 # once
                 X1 = 'ONCE FOR 1 DOSE'
                 # once/day
@@ -104,13 +105,20 @@ function Invoke-SigParser
         # frequency
         #
 
-        $F = @()
+        $Frequency = @()
 
         foreach($Key in $Components.Frequency.Keys)
         {
-            $F += if ( $Sig -match $Components.Frequency[$Key] ) { $Key }   
+            # add any match
+            $Frequency += if ( $Sig -match $Components.Frequency[$Key] ) { $Key }   
         }
-        if ( $F.count -ne 0 ) { $Data.Frequency = $F -join ' ' }
+
+        # join the frequency elements
+        if ( $Frequency.count -ne 0 ) { $Data.Frequency = $Frequency -join ' ' }
+
+        #
+        # return data to pipeline
+        #
 
         [pscustomobject]$Data
 
