@@ -6,9 +6,11 @@
 Create a Azure DevOps personal-access token (PAT).
 
 - Profile menu (colored circle with your initials at top-right corner in ADO) > Security > New Token
+![Alt text](./ADO%20PAT.png "Create token")
 - Give it a name and set its duration
 - Click `Create`
 - When the success window opens, copy the token
+![Alt text](./ADO%20PAT%20success.png "Success")
 - Store the token in a secure location
 
 ### Add the repository
