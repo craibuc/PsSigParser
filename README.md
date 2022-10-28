@@ -1,5 +1,47 @@
 # PsSigParser
 
+## Installation
+
+### Generate an Azure DevOps (ADO) personal-access token (PAT)
+Create a Azure DevOps personal-access token (PAT).
+
+- Profile menu (colored circle with your initials at top-right corner in ADO) > Security > New Token
+- Give it a name and set its duration
+- Click `Create`
+- When the success window opens, copy the token
+- Store the token in a secure location
+
+### Add the repository
+
+```powershell
+# create a credential
+$Credential = [pscredential]::new('[email address]',('[ADO PAT]' | ConvertTo-SecureString -AsPlainText))
+
+# define the repository
+$Uri='https://server.domain.tld/_packaging/[RepositoryName]/nuget/v2'
+$Repository = @{
+    Name='[RepositoryName]'
+    InstallationPolicy='Trusted'
+    SourceLocation=$Uri
+    PublishLocation=$Uri
+    ScriptSourceLocation=$Uri
+    ScriptPublishLocation=$Uri
+}
+
+# register the repo
+Register-PSRepository @Repository -Credential $Credential
+```
+
+### Install the module
+```powershell
+Install-Module PsSigParser -Repository [RepositoryName] -Scope CurrentUser
+```
+
+### Add the module to PowerShell session
+```powershell
+Import-Module PsSigParser
+```
+
 ## Usage
 
 ```powershell
