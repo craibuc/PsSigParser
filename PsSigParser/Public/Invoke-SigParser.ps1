@@ -54,8 +54,10 @@ function Invoke-SigParser
                 TID = '3 TIMES A DAY'
                 QID = '4 TIMES A DAY'
                 '5XDAY' = '5 TIMES A DAY'
+                Q3H = 'EVERY 3 HOURS'
                 Q4H = '6 TIMES A DAY|EVERY 4 HOURS'
                 Q6H = 'EVERY 6 HOURS'
+                Q8H = 'EVERY 8 HOURS'
                 # daily
                 QD = 'ONCE A DAY|EVERY DAY|DAILY|NOON'
                 # weekly
@@ -76,6 +78,10 @@ function Invoke-SigParser
 
         $Data = @{
             Sig = $Sig
+            Dose = $null
+            DoseUnit = $null
+            Route = $null
+            Frequency = $null
         }
 
         #
