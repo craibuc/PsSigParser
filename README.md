@@ -1,4 +1,5 @@
 # PsSigParser
+Parses a Sig[netur] into its component parts (i.e. dose, unit, route, frequency).
 
 ## Installation
 
